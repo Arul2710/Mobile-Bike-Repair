@@ -298,10 +298,54 @@
                         <i class="fas fa-moon text-gray-600 dark:hidden"></i>
                         <i class="fas fa-sun text-yellow-400 hidden dark:block"></i>
                     </button>
-                    <div class="lang-icons">
-                        <i class="fas fa-arrow-left lang-icon text-gray-600 dark:text-gray-300 active-lang" id="ltr-toggle"></i>
-                        <i class="fas fa-arrow-right lang-icon text-gray-600 dark:text-gray-300" id="rtl-toggle"></i>
-                    </div>
+                   <button id="direction-switch" class="relative flex items-center bg-gray-200 dark:bg-gray-800 w-24 h-10 rounded-full p-1 transition-all duration-300 focus:outline-none border border-gray-300 dark:border-gray-700 shadow-inner group">
+    
+    <div id="switch-slider" class="absolute left-1 top-1 w-10 h-8 bg-white dark:bg-blue-600 rounded-full shadow-md transition-all duration-300 ease-in-out transform"></div>
+    
+    <span class="relative z-10 flex-1 text-center text-[11px] font-bold transition-colors duration-300 text-blue-600 dark:text-white" id="ltr-text">LTR</span>
+    
+    <span class="relative z-10 flex-1 text-center text-[11px] font-bold transition-colors duration-300 text-gray-500 dark:text-gray-400" id="rtl-text">RTL</span>
+</button>
+
+<script>
+    const btn = document.getElementById('direction-switch');
+    const slider = document.getElementById('switch-slider');
+    const ltrText = document.getElementById('ltr-text');
+    const rtlText = document.getElementById('rtl-text');
+    let isRTL = false;
+
+    btn.addEventListener('click', () => {
+        isRTL = !isRTL;
+        
+        if (isRTL) {
+            // Switch to RTL
+            slider.style.transform = 'translateX(52px)';
+            rtlText.classList.replace('text-gray-500', 'text-blue-600');
+            rtlText.classList.add('dark:text-white');
+            ltrText.classList.replace('text-blue-600', 'text-gray-500');
+            document.documentElement.dir = 'rtl';
+        } else {
+            // Switch to LTR
+            slider.style.transform = 'translateX(0px)';
+            ltrText.classList.replace('text-gray-500', 'text-blue-600');
+            ltrText.classList.add('dark:text-white');
+            rtlText.classList.replace('text-blue-600', 'text-gray-500');
+            document.documentElement.dir = 'ltr';
+        }
+    });
+</script>
+
+<style>
+    /* Subtle hover effect on the whole button */
+    #direction-switch:hover {
+        border-color: #3b82f6; /* blue-500 */
+    }
+    
+    /* Ensuring smooth text color transition */
+    .transition-colors {
+        transition-property: color;
+    }
+</style>
                     <a href="login.html" class="px-3 md:px-4 py-1.5 md:py-2 text-gray-700 dark:text-gray-200 font-medium hover:text-accent transition-colors text-sm md:text-base">Login</a>
                     <a href="signup.html" class="accent-gradient px-4 md:px-5 py-1.5 md:py-2.5 rounded-full text-white font-medium hover:opacity-90 transition-opacity shadow-sm text-sm md:text-base">Sign Up</a>
                 </div>
@@ -359,30 +403,45 @@
         </div>
     </nav>
 
-    <!-- Gallery Hero Section -->
-    <section class="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-16 md:pb-20 overflow-hidden hero-pattern">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-block px-4 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 text-accentDark dark:text-blue-300 text-sm font-semibold mb-5">
-                <i class="fas fa-images mr-2"></i> Our Work
-            </div>
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-gray-900 dark:text-white leading-tight mb-5">
-                Project <span class="text-accent">Gallery</span>
-            </h1>
-            <p class="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                See our expert mechanics in action - from roadside repairs to complete overhauls
-            </p>
+    <section class="relative pt-28 sm:pt-32 md:pt-36 lg:pt-40 pb-20 md:pb-28 overflow-hidden font-sans">
+    
+    <div class="absolute inset-0 z-0">
+        <img src="img/services1.jpg" 
+             alt="Mechanic working on bike" 
+             class="w-full h-full object-cover">
+        
+        <div class="absolute inset-0 bg-gradient-to-b from-blue-900/80 via-blue-900/70 to-blue-50 dark:from-gray-900/90 dark:via-gray-900/80 dark:to-gray-900"></div>
+        
+        <div class="absolute inset-0 opacity-20 hero-pattern"></div>
+    </div>
+
+    <div class="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        
+        <div class="inline-block px-4 py-1.5 rounded-full bg-white/10 dark:bg-blue-900/40 backdrop-blur-md border border-white/20 text-white dark:text-blue-300 text-sm font-semibold mb-6 animate-fade-in-down">
+            <i class="fas fa-images mr-2"></i> Our Work Portfolio
         </div>
-    </section>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white leading-tight mb-6 tracking-tight">
+            Project <span class="text-blue-400">Gallery</span>
+        </h1>
+
+        <p class="text-lg md:text-xl text-blue-50 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed drop-shadow-md">
+            See our expert mechanics in action — from swift roadside repairs to complete performance overhauls across the city.
+        </p>
+
+        <div class="w-24 h-1.5 bg-blue-500 mx-auto rounded-full mt-10 shadow-lg shadow-blue-500/50"></div>
+    </div>
+</section>
 
     <!-- Gallery Filter Section -->
-    <section class="py-12 bg-white dark:bg-gray-800/30">
+    <section class="py-12 bg-white dark:bg-gray-900/30">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-wrap justify-center gap-3 mb-12">
-                <button class="filter-btn active px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 font-medium transition-all" data-filter="all">All</button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-all hover:border-accent" data-filter="repair">Repair</button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-all hover:border-accent" data-filter="maintenance">Maintenance</button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-all hover:border-accent" data-filter="emergency"> Emergency</button>
-                <button class="filter-btn px-6 py-2 rounded-full border border-gray-300 dark:border-gray-700 text-gray-700 dark:text-gray-300 font-medium transition-all hover:border-accent" data-filter="custom">Custom</button>
+                <button class="filter-btn active px-6 py-2 rounded-full border border-blue-500 dark:border-blue-500 font-medium transition-all" data-filter="all">All</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-blue-500 dark:border-blue-500 text-blue-500 dark:text-blue-500 font-medium transition-all hover:border-accent" data-filter="repair">Repair</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-blue-500 dark:border-blue-500 text-blue-500 dark:text-blue-500 font-medium transition-all hover:border-accent" data-filter="maintenance">Maintenance</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-blue-500 dark:border-blue-500 text-blue-500 dark:text-blue-500 font-medium transition-all hover:border-accent" data-filter="emergency"> Emergency</button>
+                <button class="filter-btn px-6 py-2 rounded-full border border-blue-500 dark:border-blue-500 text-blue-500 dark:text-blue-500 font-medium transition-all hover:border-accent" data-filter="custom">Custom</button>
             </div>
 
             <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5" id="gallery-grid">
@@ -392,10 +451,10 @@
     </section>
 
     <!-- Action Section -->
-    <section class="py-16 bg-gray-50 dark:bg-gray-800/20">
+    <section class="py-16 bg-blue-50 dark:bg-gray-900/20">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="text-center mb-10">
-                <h2 class="text-3xl font-bold text-gray-900 dark:text-white mb-3">Our Mechanics in Action</h2>
+                <h2 class="text-3xl font-bold text-blue-500 dark:text-white mb-3">Our Mechanics in Action</h2>
                 <p class="text-gray-600 dark:text-gray-300">Real moments from our service jobs across the city</p>
             </div>
             <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
@@ -424,7 +483,7 @@
         <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h2 class="text-2xl sm:text-3xl font-bold text-white mb-4">Want to See Your Bike Here?</h2>
             <p class="text-lg text-white/80 mb-6">Book our service and experience the GearUp difference</p>
-            <a href="booking.html" class="inline-flex items-center gap-2 bg-white text-gray-900 px-8 py-4 rounded-full font-bold text-lg hover:bg-gray-100 transition-colors shadow-lg">
+            <a href="booking.html" class="inline-flex items-center gap-2 bg-white text-blue-500 px-8 py-4 rounded-full font-bold text-lg hover:bg-blue-100 transition-colors shadow-lg">
                 <i class="fas fa-calendar-check text-accent"></i> Book Service Now
             </a>
         </div>
@@ -487,7 +546,7 @@
                         </li>
                         <li class="flex items-center gap-3">
                             <i class="fas fa-envelope text-gray-400"></i>
-                            support@fixmyride.in
+                            support@fixde.in
                         </li>
                         <li class="flex items-start gap-3">
                             <i class="fas fa-location-dot text-gray-400 mt-1"></i>
